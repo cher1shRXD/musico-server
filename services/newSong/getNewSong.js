@@ -1,10 +1,12 @@
 const axios = require("axios");
 
-const searchSong = async (req, res) => {
-  const query = req.query.q;
-  const url = `https://apis.naver.com/vibeWeb/musicapiweb/v4/search/track?query=${query}&start=1&display=1000&sort=RELEVANCE&cact=ogn`;
+const getNewSong = async (req, res) => {
+  const url =
+    "https://apis.naver.com/vibeWeb/musicapiweb/vibe/v1/recommend/tracks/recent?start=1&display=100";
   try {
-    const response = await axios.get(url);
+    const response = await axios.get(url, {
+      headers: { "User-Agent": "Chrome" },
+    });
 
     const data = [];
     const tracks = response.data.response.result.tracks;
@@ -25,4 +27,4 @@ const searchSong = async (req, res) => {
   }
 };
 
-module.exports = searchSong;
+module.exports = getNewSong;

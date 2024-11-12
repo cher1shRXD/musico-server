@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const getRankSong = require("./services/rank/getRankSongs");
 const searchSong = require("./services/search/searchSongs");
+const getNewSong = require("./services/newSong/getNewSong");
 
 const corsOption = {
   origin: ["http://localhost:3000"],
@@ -13,6 +14,7 @@ app.use(cors(corsOption));
 
 app.get("/vibe-chart-top100", getRankSong);
 app.get("/search", searchSong);
+app.get('/new-songs', getNewSong);
 
 
 
