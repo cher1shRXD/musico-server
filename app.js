@@ -3,6 +3,16 @@ const cors = require("cors");
 const getRankSong = require("./services/rank/getRankSongs");
 const searchSong = require("./services/search/searchSongs");
 const getNewSong = require("./services/newSong/getNewSong");
+const YoutubeMusicApi = require("youtube-music-api");
+
+
+const api = new YoutubeMusicApi();
+
+api.initalize().then(()=>{
+  api.search("ne deve ne kush").then((result) => {
+    console.log(result);
+  });
+})
 
 const corsOption = {
   origin: ["http://localhost:3000"],
