@@ -6,7 +6,7 @@ const getMe = async (req, res) => {
       "-password -refreshToken"
     );
     if(user.isShuffle) {
-      res.json({...user, queue: [...user.queue].sort(() => Math.random() - 0.5)});
+      res.send({...user, queue: [...user.queue].sort(() => Math.random() - 0.5)});
     }else{
       res.json(user);
     }
