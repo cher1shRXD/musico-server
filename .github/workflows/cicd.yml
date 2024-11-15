@@ -16,4 +16,8 @@ jobs:
           password: ${{ secrets.REMOTE_SSH_KEY }} # ssh 접속용 password
           port: ${{ secrets.REMOTE_SSH_PORT }} # ssh 접속용 port
           script: |
-            cd /var/
+            cd /var/musico-server
+            git pull
+            npm install
+            pm2 restart musico-express
+            sudo systemctl restart nginx
