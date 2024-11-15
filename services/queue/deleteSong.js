@@ -18,12 +18,12 @@ const deleteSong = async (req, res) => {
     await user.save();
 
     if (user.isShuffle) {
-      res.status(201).json({
+      res.status(201).send({
         ...user,
         queue: [...user.queue].sort(() => Math.random() - 0.5),
       });
     } else {
-      res.status(201).json(user);
+      res.status(201).send(user);
     }
   } catch {
     res.status(500).json({ message: "SERVER_ERROR" });

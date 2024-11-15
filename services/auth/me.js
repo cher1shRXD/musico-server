@@ -8,7 +8,7 @@ const getMe = async (req, res) => {
     if(user.isShuffle) {
       res.send({...user, queue: [...user.queue].sort(() => Math.random() - 0.5)});
     }else{
-      res.json(user);
+      res.send(user);
     }
     
   } catch (error) {
