@@ -10,14 +10,13 @@ const playPrevious = async (req, res) => {
     }
     await user.save();
 
-    if (user.isShuffle) {
-      res.status(200).send({
-        ...user,
-        queue: [...user.queue].sort(() => Math.random() - 0.5),
-      });
-    } else {
-      res.status(200).send(user);
+    const userObject = user.toObject();
+
+    if (userObject.isShuffle) {
+      userObject.queue = [...userObject.queue].sort(() => Math.random() - 0.5);
     }
+
+    res.json(userObject); 
   } catch {
     res.status(500).json({ message: "SERVER_ERROR" });
   }
