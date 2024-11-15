@@ -5,7 +5,7 @@ const playNext = async (req, res) => {
     const user = await User.findById(req.user.id).select(
       "-password -refreshToken"
     );
-    if(user.queue.length - 1 === user.currentSong) {
+    if(user.queue.length - 1 == user.currentSong) {
       user.currentSong = 0;
     }else{
       user.currentSong += 1;

@@ -6,10 +6,10 @@ const addSong = async (req, res) => {
       "-password -refreshToken"
     );
     const data = req.body;
-    const isDuplicated = user.queue.filter((item)=>item.trackId === data.trackId);
+    const isDuplicated = user.queue.filter((item)=>item.trackId == data.trackId);
 
     if(isDuplicated.length > 0){
-      const index = user.queue.findIndex((item) => item.trackId === data.trackId);
+      const index = user.queue.findIndex((item) => item.trackId == data.trackId);
       user.currentSong = index;
     }else{
       user.queue.push(data);
