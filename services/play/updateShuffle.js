@@ -6,13 +6,7 @@ const updateShuffle = async (req, res) => {
     user.isShuffle = !user.isShuffle;
     await user.save();
 
-    const userObject = user.toObject();
-
-    if (userObject.isShuffle) {
-      userObject.queue = [...userObject.queue].sort(() => Math.random() - 0.5);
-    }
-
-    res.json(userObject); 
+    res.send({ isShuffle: user.isShuffle }); 
   }catch{
     res.status(500).json({ message: "SERVER_ERROR" });
   }
