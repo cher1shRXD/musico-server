@@ -17,7 +17,14 @@ const addSong = async (req, res) => {
     }
     await user.save();
 
-    res.status(201).json(user);
+    if (user.isShuffle) {
+      res.status(201).json({
+        ...user,
+        queue: [...user.queue].sort(() => Math.random() - 0.5),
+      });
+    } else {
+      res.status(201).json(user);
+    }
   }catch{
     res.status(500).json({ message: 'SERVER_ERROR' });
   }

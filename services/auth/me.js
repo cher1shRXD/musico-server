@@ -5,7 +5,12 @@ const getMe = async (req, res) => {
     const user = await User.findById(req.user.id).select(
       "-password -refreshToken"
     );
-    res.json(user);
+    if(user.isShuffle) {
+      res.json({...user, queue: [...user.queue].sort(() => Math.random() - 0.5)});
+    }else{
+      res.json(user);
+    }
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "SERVER_ERROR" });
