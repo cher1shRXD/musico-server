@@ -24,8 +24,8 @@ const userSchema = new mongoose.Schema(
       default: [],
     },
     currentSong: { type: Number, default: 0 },
+    isShuffle: { type: Boolean, default: false },
     refreshToken: String,
-    isShuffle: { type:Boolean, default: false }
   },
   {
     timestamps: true,
