@@ -18,7 +18,6 @@ const addLast = async (req, res) => {
       user.queue.push(data);
       user.currentSong = user.queue.length - 1;
     }
-    user.queue.push(data);
     await user.save();
 
     const userObject = user.toObject();
