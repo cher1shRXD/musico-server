@@ -5,6 +5,7 @@ const authRouter = require("./routes/authRouter");
 const songRouter = require("./routes/songRouter");
 const queueRouter = require("./routes/queueRouter");
 const playRouter = require("./routes/playRouter");
+const playlistRouter = require("./routes/playlistRouter");
 require("dotenv").config();
 
 const PORT = process.env.PORT || 4000;
@@ -30,8 +31,9 @@ mongoose
 
 app.use("/songs", songRouter);
 app.use("/auth", authRouter);
-app.use('/queue', queueRouter);
-app.use('/play', playRouter);
+app.use("/queue", queueRouter);
+app.use("/play", playRouter);
+app.use("/playlist", playlistRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
