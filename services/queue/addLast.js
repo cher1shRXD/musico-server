@@ -16,7 +16,6 @@ const addLast = async (req, res) => {
       user.currentSong = index;
     } else {
       user.queue.push(data);
-      user.currentSong = user.queue.length - 1;
     }
     await user.save();
 
