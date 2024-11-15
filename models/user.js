@@ -17,13 +17,13 @@ const userSchema = new mongoose.Schema(
             },
           ],
           videoId: String,
-          trackId: String,
+          trackId: Number,
           coverUrl: String,
         },
       ],
       default: [],
     },
-    currentNowPlaying: { type: Number, default: 0 },
+    currentSong: { type: Number, default: 0 },
     refreshToken: String
   },
   {

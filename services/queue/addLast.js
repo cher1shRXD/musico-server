@@ -7,16 +7,16 @@ const addLast = async (req, res) => {
     );
     const data = req.body;
     const isDuplicated = user.queue.filter(
-      (item) => item.trackId == data.trackId
+      (item) => item.trackId === data.trackId
     );
     if (isDuplicated.length > 0) {
       const index = user.queue.findIndex(
-        (item) => item.trackId == data.trackId
+        (item) => item.trackId === data.trackId
       );
-      user.currentNowPlaying = index;
+      user.currentSong = index;
     } else {
       user.queue.push(data);
-      user.currentNowPlaying = user.queue.length - 1;
+      user.currentSong = user.queue.length - 1;
     }
     user.queue.push(data);
     await user.save();

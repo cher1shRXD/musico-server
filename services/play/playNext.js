@@ -5,10 +5,10 @@ const playNext = async (req, res) => {
     const user = await User.findById(req.user.id).select(
       "-password -refreshToken"
     );
-    if(user.queue.length - 1 === user.currentNowPlaying) {
-      user.currentNowPlaying = 0;
+    if(user.queue.length - 1 === user.currentSong) {
+      user.currentSong = 0;
     }else{
-      user.currentNowPlaying += 1;
+      user.currentSong += 1;
     }
     await user.save();
 
