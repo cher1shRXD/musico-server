@@ -6,12 +6,15 @@ const deleteSong = async (req, res) => {
       "-password -refreshToken"
     );
     const target = req.query.trackId;
-
-    user.queue = user.queue.filter((item) => item.trackId != target);
-    if(user.currentNowPlaying === user.queue.length - 1) {
-      user.currentNowPlaying = user.currentNowPlaying - 1;
+    if(user.queue[user.currentNowPlaying].trackId == target) {
+      if(user.queue.length - 1 == user.currentNowPlaying) {
+        user.currentNowPlaying = 0;
+      }else{
+        user.currentNowPlaying += 1;
+      }
     }
-
+    user.queue = user.queue.filter((item) => item.trackId != target);
+    
     await user.save();
 
     res.status(204).send(user);

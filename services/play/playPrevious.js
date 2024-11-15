@@ -6,7 +6,7 @@ const playPrevious = async (req, res) => {
       "-password -refreshToken"
     );
     if (user.currentNowPlaying !== 0) {
-      user.currentNowPlaying = user.currentNowPlaying - 1;
+      user.currentNowPlaying -= 1;
     }
     await user.save();
 

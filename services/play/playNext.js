@@ -8,7 +8,7 @@ const playNext = async (req, res) => {
     if(user.queue.length - 1 === user.currentNowPlaying) {
       user.currentNowPlaying = 0;
     }else{
-      user.currentNowPlaying = user.currentNowPlaying + 1;
+      user.currentNowPlaying += 1;
     }
     await user.save();
 

@@ -6,8 +6,15 @@ const addSong = async (req, res) => {
       "-password -refreshToken"
     );
     const data = req.body;
-    user.queue.push(data);
-    user.currentNowPlaying = user.queue.length - 1;
+    const isDuplicated = user.queue.filter((item)=>item.trackId == data.trackId);
+
+    if(isDuplicated.length > 0){
+      const index = user.queue.findIndex((item) => item.trackId == data.trackId);
+      user.currentNowPlaying = index;
+    }else{
+      user.queue.push(data);
+      user.currentNowPlaying = user.queue.length - 1;
+    }
     await user.save();
 
     res.status(201).json(user);
