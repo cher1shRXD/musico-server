@@ -11,9 +11,9 @@ const playlistRouter = express.Router();
 playlistRouter.get('/', auth, getMyPlaylist);
 playlistRouter.get('/my', auth, getMyPlaylistDetail);
 playlistRouter.post('/', auth, createPlaylist);
-playlistRouter.post('/add', auth, addToPlaylist);
-playlistRouter.patch('/update', auth, updatePlaylist);
+playlistRouter.post('/song', auth, addToPlaylist);
+playlistRouter.patch('/', auth, updatePlaylist);
 playlistRouter.delete('/', auth, deletePlaylist);
-playlistRouter.delete('/delete', auth, deleteFromPlaylist);
+playlistRouter.delete('/song', auth, deleteFromPlaylist);
 
 module.exports = playlistRouter;
