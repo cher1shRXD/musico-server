@@ -6,6 +6,7 @@ const addToPlaylist = require('../services/playlist/addToPlaylist');
 const updatePlaylist = require('../services/playlist/updatePlaylist');
 const deletePlaylist = require('../services/playlist/deletePlaylist');
 const deleteFromPlaylist = require('../services/playlist/deleteFromPlaylist');
+const auth = require('../middleware/auth');
 const playlistRouter = express.Router();
 
 playlistRouter.get('/', auth, getMyPlaylist);
