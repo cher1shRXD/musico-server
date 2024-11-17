@@ -6,9 +6,10 @@ const addSong = async (req, res) => {
       "-password -refreshToken"
     );
     const data = req.body;
-    const isDuplicated = user.queue.filter((item)=>item.trackId == data.trackId);
+    const isDuplicated =
+      user.queue.filter((item) => item.trackId == data.trackId).length > 0;
 
-    if(isDuplicated.length > 0){
+    if(isDuplicated){
       const index = user.queue.findIndex((item) => item.trackId == data.trackId);
       user.currentSong = index;
     }else{
@@ -17,13 +18,13 @@ const addSong = async (req, res) => {
     }
     await user.save();
 
-    const userObject = user.toObject();
+    const copiedUser = user.toObject();
 
-    if (userObject.isShuffle) {
-      userObject.queue = [...userObject.queue].sort(() => Math.random() - 0.5);
+    if (copiedUser.isShuffle) {
+      copiedUser.queue = [...copiedUser.queue].sort(() => Math.random() - 0.5);
     }
 
-    res.json(userObject); 
+    res.status(200).json(copiedUser); 
   }catch{
     res.status(500).json({ message: 'SERVER_ERROR' });
   }
