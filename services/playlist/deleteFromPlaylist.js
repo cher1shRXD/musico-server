@@ -11,7 +11,7 @@ const deleteFromPlaylist = async (req, res) => {
     }
 
     playlist.songs = playlist.songs.filter(
-      (item) => item.trackId == trackId
+      (item) => item.trackId != trackId
     );
     
     await playlist.save();
