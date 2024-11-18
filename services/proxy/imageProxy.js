@@ -8,7 +8,7 @@ const imageUrlProxy = async (req, res) => {
   res.json({
     proxiedUrl: `${req.protocol}://${req.get(
       "host"
-    )}/proxy-image?url=${encodeURIComponent(url)}`,
+    )}/proxy/image?url=${encodeURIComponent(url)}`,
   });
 }
 

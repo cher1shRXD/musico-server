@@ -6,7 +6,6 @@ const songRouter = require("./routes/songRouter");
 const queueRouter = require("./routes/queueRouter");
 const playRouter = require("./routes/playRouter");
 const playlistRouter = require("./routes/playlistRouter");
-const imageProxy = require("./services/proxy/imageProxy");
 const proxyRouter = require("./routes/proxyRouter");
 require("dotenv").config();
 
