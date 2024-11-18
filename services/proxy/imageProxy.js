@@ -1,4 +1,4 @@
-const imageProxy = async (req, res) => {
+const imageUrlProxy = async (req, res) => {
   const { url } = req.query;
 
   if (!url || !url.startsWith("http")) {
@@ -12,4 +12,5 @@ const imageProxy = async (req, res) => {
   });
 }
 
-module.exports = imageProxy;
+
+module.exports = imageUrlProxy;
