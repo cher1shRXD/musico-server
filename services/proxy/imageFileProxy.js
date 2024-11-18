@@ -1,4 +1,4 @@
-export const imageFileProxy = async (req, res) => {
+const imageFileProxy = async (req, res) => {
   const { url } = req.query;
 
   if (!url) {
