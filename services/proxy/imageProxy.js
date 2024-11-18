@@ -1,3 +1,5 @@
+const axios = require("axios");
+
 const imageProxy = async (req, res) => {
   try {
     const response = await axios.get(req.query.url, { responseType: 'arraybuffer' });
