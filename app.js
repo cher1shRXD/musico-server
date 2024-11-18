@@ -35,7 +35,7 @@ app.use("/auth", authRouter);
 app.use("/queue", queueRouter);
 app.use("/play", playRouter);
 app.use("/playlist", playlistRouter);
-app.user('/proxy', proxyRouter);
+app.use('/proxy', proxyRouter);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
