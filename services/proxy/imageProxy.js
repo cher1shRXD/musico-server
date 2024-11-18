@@ -1,14 +1,15 @@
-const axios = require("axios");
-
 const imageProxy = async (req, res) => {
-  try {
-    const response = await axios.get(req.query.url, { responseType: 'arraybuffer' });
-    res.set('Access-Control-Allow-Origin', '*');
-    res.contentType(response.headers['content-type']);
-    res.send(response.data);
-  } catch (error) {
-    res.status(500).send('Failed to fetch the image');
+  const { url } = req.query;
+
+  if (!url || !url.startsWith("http")) {
+    return res.status(400).send("Invalid URL");
   }
+
+  res.json({
+    proxiedUrl: `${req.protocol}://${req.get(
+      "host"
+    )}/proxy-image?url=${encodeURIComponent(url)}`,
+  });
 }
 
 module.exports = imageProxy;
