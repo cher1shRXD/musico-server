@@ -1,4 +1,4 @@
-const imageFileProxy = async (req, res) => {
+export const imageFileProxy = async (req, res) => {
   const { url } = req.query;
 
   if (!url) {
@@ -11,13 +11,17 @@ const imageFileProxy = async (req, res) => {
       throw new Error("Failed to fetch image");
     }
 
-    res.set("Access-Control-Allow-Origin", "*");
+    res.set({
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET,HEAD,OPTIONS",
+    });
+
     res.contentType(response.headers.get("content-type"));
     response.body.pipe(res);
   } catch (error) {
     console.error(error);
     res.status(500).send("Failed to fetch image");
   }
-}
+};
 
 module.exports = imageFileProxy;
