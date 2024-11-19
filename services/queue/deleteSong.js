@@ -7,9 +7,12 @@ const deleteSong = async (req, res) => {
     );
     const target = req.query.trackId;
     if(user.queue[user.currentSong].trackId == target) {
-      if(user.queue.length - 1 == user.currentSong) {
+      if (
+        user.queue.length - 2 == user.currentSong ||
+        user.queue.length - 1 == user.currentSong
+      ) {
         user.currentSong = 0;
-      }else{
+      } else {
         user.currentSong += 1;
       }
     }
