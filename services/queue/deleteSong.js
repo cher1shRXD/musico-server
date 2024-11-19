@@ -6,7 +6,6 @@ const deleteSong = async (req, res) => {
       "-password -refreshToken"
     );
     const target = req.query.trackId;
-    }
 
     user.queue = user.queue.filter((item) => item.trackId != target);
     if (user.queue.length - 1 === user.currentSong) {
