@@ -21,7 +21,7 @@ const playlistSchema = new mongoose.Schema(
               imageUrl: String,
             },
           ],
-          videoId: String,
+          videoId: [String],
           trackId: Number,
           coverUrl: String,
         },
