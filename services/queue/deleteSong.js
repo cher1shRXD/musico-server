@@ -7,13 +7,14 @@ const deleteSong = async (req, res) => {
     );
     const target = req.query.trackId;
 
-    user.queue = user.queue.filter((item) => item.trackId != target);
     if (user.queue.length - 1 === user.currentSong) {
       if (user.currentSong !== 0) {
         user.currentSong -= 1;
       }
     }
 
+    user.queue = user.queue.filter((item) => item.trackId != target);
+    
     await user.save();
 
     const userObject = user.toObject();
