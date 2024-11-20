@@ -23,6 +23,25 @@ const userSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    originalQueue: {
+      type: [
+        {
+          title: String,
+          artist: [
+            {
+              artistId: Number,
+              artistName: String,
+              isGroup: Boolean,
+              imageUrl: String,
+            },
+          ],
+          videoId: [String],
+          trackId: Number,
+          coverUrl: String,
+        },
+      ],
+      default: [],
+    },
     currentSong: { type: Number, default: 0 },
     isShuffle: { type: Boolean, default: false },
     refreshToken: String,

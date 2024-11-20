@@ -1,4 +1,5 @@
 const User = require("../../models/user");
+const { use } = require("../../routes/authRouter");
 
 const deleteSong = async (req, res) => {
   try {
@@ -7,23 +8,16 @@ const deleteSong = async (req, res) => {
     );
     const target = req.query.trackId;
 
-    if (user.queue.length - 1 === user.currentSong) {
-      if (user.currentSong !== 0) {
-        user.currentSong -= 1;
-      }
+    if (user.currentSong !== 0) {
+      user.currentSong -= 1;
     }
 
     user.queue = user.queue.filter((item) => item.trackId != target);
+    user.originalQueue = user.queue.filter((item) => item.trackId != target);
     
     await user.save();
 
-    const userObject = user.toObject();
-
-    if (userObject.isShuffle) {
-      userObject.queue = [...userObject.queue].sort(() => Math.random() - 0.5);
-    }
-
-    res.json(userObject);
+    res.json(user);
   } catch {
     res.status(500).json({ message: "SERVER_ERROR" });
   }

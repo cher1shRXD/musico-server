@@ -14,17 +14,12 @@ const addSong = async (req, res) => {
       user.currentSong = index;
     }else{
       user.queue.push(data);
+      user.originalQueue.push(data);
       user.currentSong = user.queue.length - 1;
     }
     await user.save();
 
-    const copiedUser = user.toObject();
-
-    if (copiedUser.isShuffle) {
-      copiedUser.queue = [...copiedUser.queue].sort(() => Math.random() - 0.5);
-    }
-
-    res.status(200).json(copiedUser); 
+    res.status(200).json(user); 
   }catch{
     res.status(500).json({ message: 'SERVER_ERROR' });
   }

@@ -11,13 +11,8 @@ const playNext = async (req, res) => {
       user.currentSong += 1;
     }
     await user.save();
-    const userObject = user.toObject();
 
-    if (userObject.isShuffle) {
-      userObject.queue = [...userObject.queue].sort(() => Math.random() - 0.5);
-    }
-
-    res.json(userObject); 
+    res.json(user); 
   }catch{
     res.status(500).json({ message: "SERVER_ERROR" });
   }

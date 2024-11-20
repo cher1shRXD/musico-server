@@ -8,6 +8,7 @@ const copyPlaylist = async (req, res) => {
     const playlist = await Playlist.findOne({ id: playlistId });
 
     user.queue = playlist.songs;
+    user.originalQueue = playlist.songs;
     user.currentSong = 0;
 
     user.save();
