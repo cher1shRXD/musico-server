@@ -9,6 +9,8 @@ express.js + mongodb atlas가 사용되었으며 사용된 라이브러리는 �
 - jsonwebtoken
 - mongoose
 - uuid
+- swagger-ui-express
+- swagger-jsdoc
 
 # 뮤지코에서는 이런 기능을 제공합니다
 1. 노래 재생
