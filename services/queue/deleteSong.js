@@ -1,5 +1,4 @@
 const User = require("../../models/user");
-const { use } = require("../../routes/authRouter");
 
 const deleteSong = async (req, res) => {
   try {
@@ -7,9 +6,12 @@ const deleteSong = async (req, res) => {
       "-password -refreshToken"
     );
     const target = req.query.trackId;
+    const targetIdx = user.queue.findIndex(item=>item.trackId == target);
 
     if (user.currentSong !== 0) {
-      user.currentSong -= 1;
+      if(targetIdx <= user.currentSong) {
+        user.currentSong -= 1;
+      }
     }
 
     user.queue = user.queue.filter((item) => item.trackId != target);
