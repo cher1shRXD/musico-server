@@ -6,6 +6,14 @@ const getMe = require("../services/auth/me");
 const auth = require("../middleware/auth");
 const authRouter = express.Router();
 
+authRouter.post("/login", login);
+authRouter.post("/signup", signup);
+authRouter.post("/refresh", refresh);
+authRouter.get("/me", auth, getMe);
+
+module.exports = authRouter;
+
+
 /**
  * @swagger
  * tags:
@@ -87,9 +95,3 @@ const authRouter = express.Router();
  *       200:
  *         description: 나 조회 성공
  */
-authRouter.post("/login", login);
-authRouter.post("/signup", signup);
-authRouter.post("/refresh", refresh);
-authRouter.get("/me", auth, getMe);
-
-module.exports = authRouter;

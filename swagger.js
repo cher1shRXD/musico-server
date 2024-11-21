@@ -10,10 +10,6 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:4000",
-        description: "test server",
-      },
-      {
         url: "https://musicoapi.cher1shrxd.me",
         description: "production server",
       },

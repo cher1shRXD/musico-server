@@ -5,11 +5,18 @@ const auth = require('../middleware/auth');
 const updateShuffle = require('../services/play/updateShuffle');
 const playRouter = express.Router();
 
+
+playRouter.get('/next', auth, playNext);
+playRouter.get("/previous", auth, playPrevious);
+playRouter.patch('/update-shuffle', auth, updateShuffle);
+
+module.exports = playRouter;
+
 /**
  * @swagger
  * tags:
  *   name: Play
- *   description: Song playback management APIs
+ *   description: 재생
  */
 
 /**
@@ -17,10 +24,10 @@ const playRouter = express.Router();
  * /play/next:
  *   get:
  *     tags: [Play]
- *     summary: Play the next song
+ *     summary: currentSong에 +1
  *     responses:
  *       200:
- *         description: Next song played successfully
+ *         description: 다음 곡 재생 성공
  */
 
 /**
@@ -28,10 +35,10 @@ const playRouter = express.Router();
  * /play/previous:
  *   get:
  *     tags: [Play]
- *     summary: Play the previous song
+ *     summary: currentSong에 -1
  *     responses:
  *       200:
- *         description: Previous song played successfully
+ *         description: 이전 곡 재생 성공
  */
 
 /**
@@ -39,14 +46,8 @@ const playRouter = express.Router();
  * /play/update-shuffle:
  *   patch:
  *     tags: [Play]
- *     summary: Update shuffle mode
+ *     summary: 재생목록 섞기 on off
  *     responses:
  *       200:
- *         description: Shuffle mode updated successfully
+ *         description: 셔플 전환 성공
  */
-
-playRouter.get('/next', auth, playNext);
-playRouter.get("/previous", auth, playPrevious);
-playRouter.patch('/update-shuffle', auth, updateShuffle);
-
-module.exports = playRouter;

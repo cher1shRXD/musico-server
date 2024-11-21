@@ -9,6 +9,16 @@ const deleteFromPlaylist = require('../services/playlist/deleteFromPlaylist');
 const auth = require('../middleware/auth');
 const playlistRouter = express.Router();
 
+playlistRouter.get('/', auth, getMyPlaylist);
+playlistRouter.get('/my', auth, getMyPlaylistDetail);
+playlistRouter.post('/', auth, createPlaylist);
+playlistRouter.post('/song', auth, addToPlaylist);
+playlistRouter.patch('/', auth, updatePlaylist);
+playlistRouter.delete('/', auth, deletePlaylist);
+playlistRouter.delete('/song', auth, deleteFromPlaylist);
+
+module.exports = playlistRouter;
+
 /**
  * @swagger
  * tags:
@@ -32,7 +42,7 @@ const playlistRouter = express.Router();
  * /playlist/my:
  *   get:
  *     tags: [Playlist]
- *     summary: 내 플리 상세 조회
+ *     summary: 플레이리스트 id로 내 플리 상세 조회
  *     parameters:
  *       - name: playlistId
  *         in: query
@@ -72,7 +82,7 @@ const playlistRouter = express.Router();
  * /playlist/song:
  *   post:
  *     tags: [Playlist]
- *     summary: 플레이리스트에 곡 추가
+ *     summary: videoId가 있는 곡 객체와 플레이리스트 id로 플레이리스트에 곡 추가
  *     parameters:
  *       - name: playlistId
  *         in: query
@@ -130,7 +140,7 @@ const playlistRouter = express.Router();
  * /playlist:
  *   patch:
  *     tags: [Playlist]
- *     summary: Update a playlist
+ *     summary: 플레이리스트 수정
  *     parameters:
  *       - name: playlistId
  *         in: query
@@ -150,7 +160,7 @@ const playlistRouter = express.Router();
  *                 type: string
  *     responses:
  *       200:
- *         description: Playlist updated successfully
+ *         description: 플레이리스트 수정 성공
  */
 
 /**
@@ -158,7 +168,7 @@ const playlistRouter = express.Router();
  * /playlist:
  *   delete:
  *     tags: [Playlist]
- *     summary: Delete a playlist
+ *     summary: 플레이리스트 삭제
  *     parameters:
  *       - name: playlistId
  *         in: query
@@ -169,7 +179,7 @@ const playlistRouter = express.Router();
  *           example: "090679dd-3760-45e4-a111-e74ea32eaaa"
  *     responses:
  *       200:
- *         description: Playlist deleted successfully
+ *         description: 플레이리스트 삭제 성공
  */
 
 /**
@@ -177,7 +187,7 @@ const playlistRouter = express.Router();
  * /playlist/song:
  *   delete:
  *     tags: [Playlist]
- *     summary: Remove a song from a playlist
+ *     summary: 플레이리스트 id와 트랙 id로 플레이리스트에서 곡 삭제
  *     parameters:
  *       - name: playlistId
  *         in: query
@@ -195,15 +205,5 @@ const playlistRouter = express.Router();
  *           example: "9999999"
  *     responses:
  *       200:
- *         description: Song removed from playlist successfully
+ *         description: 플레이리스트에서 곡 삭제 성공
  */
-
-playlistRouter.get('/', auth, getMyPlaylist);
-playlistRouter.get('/my', auth, getMyPlaylistDetail);
-playlistRouter.post('/', auth, createPlaylist);
-playlistRouter.post('/song', auth, addToPlaylist);
-playlistRouter.patch('/', auth, updatePlaylist);
-playlistRouter.delete('/', auth, deletePlaylist);
-playlistRouter.delete('/song', auth, deleteFromPlaylist);
-
-module.exports = playlistRouter;

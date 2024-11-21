@@ -6,11 +6,18 @@ const addLast = require("../services/queue/addLast");
 const copyPlaylist = require("../services/queue/copyPlaylist");
 const queueRouter = express.Router();
 
+queueRouter.post("/", auth, addSong);
+queueRouter.delete('/', auth, deleteSong);
+queueRouter.post('/add', auth, addLast);
+queueRouter.post('/copy', auth, copyPlaylist);
+
+module.exports = queueRouter;
+
 /**
  * @swagger
  * tags:
  *   name: Queue
- *   description: Queue management APIs
+ *   description: 내 재생목록 가져오기
  */
 
 /**
@@ -18,7 +25,7 @@ const queueRouter = express.Router();
  * /queue:
  *   post:
  *     tags: [Queue]
- *     summary: Add a song to the queue
+ *     summary: videoId가 있는 곡을 재생목록에 추가
  *     requestBody:
  *       request: true
  *       content:
@@ -28,39 +35,39 @@ const queueRouter = express.Router();
  *             properties:
  *               title:
  *                 type: string
- *                 description: The title of the track
+ *                 description: 트랙 제목
  *               artist:
  *                 type: array
- *                 description: List of artists
+ *                 description: 아티스트 목록
  *                 items:
  *                   type: object
  *                   properties:
  *                     artistName:
  *                       type: string
- *                       description: The name of the artist
+ *                       description: 아티스트 이름
  *                     artistId:
  *                       type: number
- *                       description: The unique ID of the artist
+ *                       description: 아티스트 아이디
  *                     isGroup:
  *                       type: boolean
- *                       description: Whether the artist is a group
+ *                       description: 그룹인지 아닌지 표시
  *                     imageUrl:
  *                       type: string
- *                       description: URL of the artist's image
+ *                       description: 아티스트 프로필 사진
  *               videoId:
  *                 type: array
- *                 description: List of video IDs
+ *                 description: videoId가 담긴 배열
  *                 items:
  *                   type: string
  *               trackId:
  *                 type: number
- *                 description: Unique ID of the track
+ *                 description: 트랙 아이디
  *               coverUrl:
  *                 type: string
- *                 description: URL of the cover image
+ *                 description: 앨범 커버
  *     responses:
  *       200:
- *         description: Song added to queue successfully
+ *         description: 재생목록에 추가 성공
  */
 
 /**
@@ -68,7 +75,7 @@ const queueRouter = express.Router();
  * /queue:
  *   delete:
  *     tags: [Queue]
- *     summary: Remove a song from the queue
+ *     summary: 트랙 id로 재생목록에서 곡 삭제
  *     parameters:
  *       - name: targetId
  *         in: query
@@ -76,10 +83,10 @@ const queueRouter = express.Router();
  *         required: true
  *         schema:
  *           type: string
- *           example: "9999999"
+ *           example: "99999999"
  *     responses:
  *       200:
- *         description: Song removed from queue successfully
+ *         description: 재생목록에서 곡 삭제 성공
  */
 
 /**
@@ -87,7 +94,7 @@ const queueRouter = express.Router();
  * /queue/add:
  *   post:
  *     tags: [Queue]
- *     summary: Add a song to the end of the queue
+ *     summary: videoId가 있는 곡을 재생목록 가장 마지막에 곡 추가
  *     requestBody:
  *       request: true
  *       content:
@@ -97,36 +104,36 @@ const queueRouter = express.Router();
  *             properties:
  *               title:
  *                 type: string
- *                 description: The title of the track
+ *                 description: 트랙 제목
  *               artist:
  *                 type: array
- *                 description: List of artists
+ *                 description: 아티스트 목록
  *                 items:
  *                   type: object
  *                   properties:
  *                     artistName:
  *                       type: string
- *                       description: The name of the artist
+ *                       description: 아티스트 이름
  *                     artistId:
  *                       type: number
- *                       description: The unique ID of the artist
+ *                       description: 아티스트 아이디
  *                     isGroup:
  *                       type: boolean
- *                       description: Whether the artist is a group
+ *                       description: 그룹인지 아닌지 표시
  *                     imageUrl:
  *                       type: string
- *                       description: URL of the artist's image
+ *                       description: 아티스트 프로필 이미지
  *               videoId:
  *                 type: array
- *                 description: List of video IDs
+ *                 description: 비디오 아이디가 담긴 배열
  *                 items:
  *                   type: string
  *               trackId:
  *                 type: number
- *                 description: Unique ID of the track
+ *                 description: 트랙 id
  *               coverUrl:
  *                 type: string
- *                 description: URL of the cover image
+ *                 description: 앨범 커버
  *     responses:
  *       200:
  *         description: Song added to the end of the queue successfully
@@ -137,7 +144,7 @@ const queueRouter = express.Router();
  * /queue/copy:
  *   post:
  *     tags: [Queue]
- *     summary: Copy a playlist to the queue
+ *     summary: 플레이리스트 id를 이용해 특정 플레이리스트를 재생목록으로 복사
  *     parameters:
  *       - name: playlistId
  *         in: query
@@ -148,12 +155,5 @@ const queueRouter = express.Router();
  *           example: "090679dd-3760-45e4-a111-e74ea32eaaa"
  *     responses:
  *       200:
- *         description: Playlist copied to queue successfully
+ *         description: 플레이리스트 복사 성공
  */
-
-queueRouter.post("/", auth, addSong);
-queueRouter.delete('/', auth, deleteSong);
-queueRouter.post('/add', auth, addLast);
-queueRouter.post('/copy', auth, copyPlaylist);
-
-module.exports = queueRouter;

@@ -4,11 +4,17 @@ const searchSong = require("../services/song/searchSongs");
 const getNewSong = require("../services/song/getNewSong");
 const songRouter = express.Router();
 
+songRouter.get("/chart", getRankSong);
+songRouter.get("/search", searchSong);
+songRouter.get("/new-songs", getNewSong);
+
+module.exports = songRouter;
+
 /**
  * @swagger
  * tags:
  *   name: Songs
- *   description: Song-related APIs
+ *   description: 노래 목록 가져오기
  */
 
 /**
@@ -16,10 +22,10 @@ const songRouter = express.Router();
  * /songs/chart:
  *   get:
  *     tags: [Songs]
- *     summary: Get ranked songs (chart)
+ *     summary: 차트 가져오기
  *     responses:
  *       200:
- *         description: Ranked songs retrieved successfully
+ *         description: 차트 가져오기 성공
  */
 
 /**
@@ -27,7 +33,7 @@ const songRouter = express.Router();
  * /songs/search:
  *   get:
  *     tags: [Songs]
- *     summary: Search for songs
+ *     summary: 검색어를 통해 노래 검색
  *     parameters:
  *       - name: q
  *         in: query
@@ -35,10 +41,10 @@ const songRouter = express.Router();
  *         required: true
  *         schema:
  *           type: string
- *           example: "애쉬아일랜드"
+ *           example: "악몽 - 애쉬아일랜드"
  *     responses:
  *       200:
- *         description: Songs retrieved successfully
+ *         description: 노래 검색 성공
  */
 
 /**
@@ -46,14 +52,8 @@ const songRouter = express.Router();
  * /songs/new-songs:
  *   get:
  *     tags: [Songs]
- *     summary: Get new songs
+ *     summary: 신곡 가져오기
  *     responses:
  *       200:
- *         description: New songs retrieved successfully
+ *         description: 신곡 가져오기 성공
  */
-
-songRouter.get("/chart", getRankSong);
-songRouter.get("/search", searchSong);
-songRouter.get("/new-songs", getNewSong);
-
-module.exports = songRouter;
