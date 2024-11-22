@@ -14,7 +14,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 4000;
 
 const corsOption = {
-  origin: ["http://localhost:3000",'https://musico.cher1shrxd.me', "http://localhost:5173"],
+  origin: ["http://localhost:3000",'https://musico.cher1shrxd.me', "http://localhost:5173", "http://10.80.161.185:5173"],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true,
