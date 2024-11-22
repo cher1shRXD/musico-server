@@ -15,10 +15,8 @@ const PORT = process.env.PORT || 4000;
 
 const corsOption = {
   origin: [
-    "http://localhost:3000",
-    "https://musico.cher1shrxd.me",
+    "https://musico.kr",
     "http://localhost:5173",
-    "http://172.30.1.13:5173",
   ],
   methods: ["GET", "POST", "PUT", "PATCH", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
