@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "https://musicoapi.cher1shrxd.me",
+        url: "https://api.musico.kr",
         description: "production server",
       },
     ],
